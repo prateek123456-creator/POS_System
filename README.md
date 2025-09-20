@@ -1,44 +1,79 @@
-POS Cart & Billing System – Minimal Doc
-/////////////////////////////////////////////////////////////////////////
+POS Cart and Billing System – Short Documentation
 
+Project: POS_System
 Framework: ASP.NET Core MVC
-///////////////////////////////////////////
-Features:
 
-Add/update/remove products in cart
+1. Overview
 
-Calculate subtotal, 4% tax, discount (flat/%), payable
+A POS module to:
+
+Add, update, and remove products in a cart
+
+Calculate subtotal, tax (4%), discount (flat or %), and payable amount
 
 Suspend and restore orders
 
-Bill preview and payment confirmation
-/////////////////////////////////////////////////////////////////////////////////////////
-Models:
+Generate Bill preview and Payment confirmation
 
-Product → Id, Name, Price
+2. Models
 
-CartItem → Product, Quantity, Subtotal
-////////////////////////////////////////////////////////////////////////////////////////
+Product: Id, Name, Price
 
-Controller Actions:
+CartItem: Product, Quantity, Subtotal (Price × Quantity)
 
-AddToCart, UpdateQuantity, Remove
+3. Controller: CartController
+Key Features:
 
-ApplyDiscount (flat or %)
+AddToCart: Add or merge products
 
-Cancel, Suspend, Restore
+UpdateQuantity / Remove: Edit or delete products
 
-Bill, Payment
-/////////////////////////////////////////////////////////////////////////////////////////
-View:
+ApplyDiscount: Apply flat or % discount
 
-Left panel → Cart table + billing
+Cancel: Clear cart and reset discount
 
-Right panel → Add product
+Suspend / Restore: Temporarily pause and resume orders
 
-Discount input with Flat/% option
+Bill / Payment: Show bill preview and confirm payment
 
-Buttons: Suspend, Restore, Cancel, Bill, Payment
+Variables:
 
-Workflow:
-Add products → Apply discount → Suspend/Restore → Bill → Payment
+_cart → active cart
+
+_suspendedCart → suspended cart
+
+_discount → current discount
+
+_suspendedDiscount → discount for suspended cart
+
+TaxRate = 0.04m → 4% tax
+
+4. View (Index.cshtml)
+
+Left Panel: Cart table + billing summary
+
+Right Panel: Add product form
+
+Billing Summary: Total Items, Subtotal, Tax, Total, Discount, Payable
+
+Discount Form: Input + Flat/% selection
+
+Actions: Suspend, Restore, Cancel, Bill, Payment
+
+Messages: Bill preview and payment confirmation via TempData
+
+5. Workflow Example
+
+Add products → Cart shows subtotal
+
+Tax and discount applied → Payable calculated
+
+Suspend → temporarily save cart
+
+Restore → retrieve suspended cart
+
+Bill → preview order
+
+Payment → finalize and show confirmation
+
+This short documentation summarizes features, workflow, and structure of your POS system.
